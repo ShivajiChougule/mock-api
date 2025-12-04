@@ -3,184 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Tickets Mock API</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        .header h1 { font-size: 28px; margin-bottom: 10px; }
-        .status { 
-            display: inline-block;
-            padding: 8px 16px;
-            background: #4ade80;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .content { padding: 30px; }
-        .endpoint-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .endpoint-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .method {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            color: white;
-            background: #3b82f6;
-        }
-        .url-box {
-            background: #1e293b;
-            color: #a5f3fc;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            margin: 10px 0;
-            word-break: break-all;
-            cursor: pointer;
-        }
-        .url-box:hover { background: #334155; }
-        .btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-right: 8px;
-        }
-        .btn:hover { background: #5568d3; }
-        .btn.test { background: #10b981; }
-        .btn.test:hover { background: #059669; }
-        .description {
-            color: #64748b;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .output {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            max-height: 300px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 12px;
-            white-space: pre-wrap;
-            display: none;
-        }
-        .note {
-            background: #dbeafe;
-            border-left: 4px solid #3b82f6;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .note strong { color: #1e40af; }
-        .json-output {
-            background: white;
-            color: #1e293b;
-            font-family: 'Courier New', monospace;
-            padding: 20px;
-            white-space: pre;
-            overflow-x: auto;
-        }
-    </style>
+    <title>Support Tickets API</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 Support Tickets Mock API</h1>
-            <p style="margin: 10px 0;">Ready for Microsoft Fabric Pipeline & Postman</p>
-            <span class="status">● LIVE</span>
-        </div>
-        
-        <div class="content">
-            <div class="note">
-                <strong>📌 Base URL:</strong> <span id="baseUrl"></span><br>
-                <strong>✅ Returns pure JSON - works with Postman, Fabric, Python, etc.</strong>
-            </div>
-
-            <div class="endpoint-card">
-                <h3><span class="method">GET</span> All Tickets</h3>
-                <p class="description">Get all support tickets (JSON format)</p>
-                <div class="url-box" id="url1"></div>
-                <button class="btn" onclick="copyUrl('url1')">📋 Copy</button>
-                <button class="btn test" onclick="testUrl('url1', 'output1')">▶ Test</button>
-                <div class="output" id="output1"></div>
-            </div>
-
-            <div class="endpoint-card">
-                <h3><span class="method">GET</span> Single Ticket</h3>
-                <p class="description">Get ticket by ID (Example: T001)</p>
-                <div class="url-box" id="url2"></div>
-                <button class="btn" onclick="copyUrl('url2')">📋 Copy</button>
-                <button class="btn test" onclick="testUrl('url2', 'output2')">▶ Test</button>
-                <div class="output" id="output2"></div>
-            </div>
-
-            <div class="endpoint-card">
-                <h3><span class="method">GET</span> Filter by Status</h3>
-                <p class="description">Get tickets by status (pending/closed/resolved)</p>
-                <div class="url-box" id="url3"></div>
-                <button class="btn" onclick="copyUrl('url3')">📋 Copy</button>
-                <button class="btn test" onclick="testUrl('url3', 'output3')">▶ Test</button>
-                <div class="output" id="output3"></div>
-            </div>
-
-            <div class="endpoint-card">
-                <h3><span class="method">GET</span> Statistics</h3>
-                <p class="description">Get aggregated ticket statistics</p>
-                <div class="url-box" id="url4"></div>
-                <button class="btn" onclick="copyUrl('url4')">📋 Copy</button>
-                <button class="btn test" onclick="testUrl('url4', 'output4')">▶ Test</button>
-                <div class="output" id="output4"></div>
-            </div>
-
-            <div class="endpoint-card">
-                <h3><span class="method">GET</span> CSV Format</h3>
-                <p class="description">Get data in CSV format for direct import</p>
-                <div class="url-box" id="url5"></div>
-                <button class="btn" onclick="copyUrl('url5')">📋 Copy</button>
-                <button class="btn test" onclick="testUrl('url5', 'output5')">▶ Test</button>
-                <div class="output" id="output5"></div>
-            </div>
-        </div>
-    </div>
-
     <script>
         const tickets = [
             { ticket_id: 'T001', customer_id: '1001', issue_type: 'Payment Issue', ticket_date: '2022-07-19', resolution_status: 'closed' },
@@ -200,86 +25,94 @@
             { ticket_id: 'T015', customer_id: '1015', issue_type: 'Payment error', ticket_date: '26-07-2022', resolution_status: 'Pending' }
         ];
 
-        const baseUrl = window.location.origin + window.location.pathname;
-        document.getElementById('baseUrl').textContent = baseUrl;
-        document.getElementById('url1').textContent = `${baseUrl}?api=tickets`;
-        document.getElementById('url2').textContent = `${baseUrl}?api=tickets&id=T001`;
-        document.getElementById('url3').textContent = `${baseUrl}?api=tickets&status=pending`;
-        document.getElementById('url4').textContent = `${baseUrl}?api=stats`;
-        document.getElementById('url5').textContent = `${baseUrl}?api=csv`;
+        const params = new URLSearchParams(window.location.search);
+        const api = params.get('api');
+        
+        let response;
+        let contentType = 'application/json';
+        
+        if (api === 'tickets') {
+            const id = params.get('id');
+            const status = params.get('status');
+            const issue_type = params.get('issue_type');
+            const customer_id = params.get('customer_id');
 
-        function handleAPIRequest() {
-            const params = new URLSearchParams(window.location.search);
-            const api = params.get('api');
-            
-            if (!api) return;
-
-            let response;
-            let contentType = 'application/json';
-            
-            if (api === 'tickets') {
-                const id = params.get('id');
-                const status = params.get('status');
-                const issue_type = params.get('issue_type');
-                const customer_id = params.get('customer_id');
-
-                if (id) {
-                    const ticket = tickets.find(t => t.ticket_id === id);
-                    response = ticket || { error: 'Ticket not found' };
-                } else {
-                    let filtered = tickets;
-                    if (status) filtered = filtered.filter(t => t.resolution_status.toLowerCase() === status.toLowerCase());
-                    if (issue_type) filtered = filtered.filter(t => t.issue_type.toLowerCase().includes(issue_type.toLowerCase()));
-                    if (customer_id) filtered = filtered.filter(t => t.customer_id === customer_id);
-                    response = { count: filtered.length, tickets: filtered };
-                }
-            } else if (api === 'stats') {
-                const stats = {
-                    total: tickets.length,
-                    by_status: {},
-                    by_issue_type: {}
-                };
-                tickets.forEach(t => {
-                    const status = t.resolution_status.toLowerCase() || 'unknown';
-                    const issue = t.issue_type.toLowerCase();
-                    stats.by_status[status] = (stats.by_status[status] || 0) + 1;
-                    stats.by_issue_type[issue] = (stats.by_issue_type[issue] || 0) + 1;
-                });
-                response = stats;
-            } else if (api === 'csv') {
-                contentType = 'text/csv';
-                response = 'ticket_id,customer_id,issue_type,ticket_date,resolution_status\n' + 
-                    tickets.map(t => `${t.ticket_id},${t.customer_id},${t.issue_type},${t.ticket_date},${t.resolution_status}`).join('\n');
-                document.body.innerHTML = `<div class="json-output">${response}</div>`;
-                return;
+            if (id) {
+                const ticket = tickets.find(t => t.ticket_id === id);
+                response = ticket || { error: 'Ticket not found' };
+            } else {
+                let filtered = tickets;
+                if (status) filtered = filtered.filter(t => t.resolution_status.toLowerCase() === status.toLowerCase());
+                if (issue_type) filtered = filtered.filter(t => t.issue_type.toLowerCase().includes(issue_type.toLowerCase()));
+                if (customer_id) filtered = filtered.filter(t => t.customer_id === customer_id);
+                response = { count: filtered.length, tickets: filtered };
             }
-
-            // Return pure JSON
-            document.body.innerHTML = `<div class="json-output">${JSON.stringify(response, null, 2)}</div>`;
-        }
-
-        function copyUrl(elementId) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const original = btn.textContent;
-                btn.textContent = '✓ Copied!';
-                setTimeout(() => btn.textContent = original, 2000);
+            document.body.innerHTML = '<pre style="margin:0;font-family:monospace;white-space:pre-wrap;">' + JSON.stringify(response, null, 2) + '</pre>';
+            
+        } else if (api === 'stats') {
+            const stats = {
+                total: tickets.length,
+                by_status: {},
+                by_issue_type: {}
+            };
+            tickets.forEach(t => {
+                const status = t.resolution_status.toLowerCase() || 'unknown';
+                const issue = t.issue_type.toLowerCase();
+                stats.by_status[status] = (stats.by_status[status] || 0) + 1;
+                stats.by_issue_type[issue] = (stats.by_issue_type[issue] || 0) + 1;
             });
+            document.body.innerHTML = '<pre style="margin:0;font-family:monospace;white-space:pre-wrap;">' + JSON.stringify(stats, null, 2) + '</pre>';
+            
+        } else if (api === 'csv') {
+            const csv = 'ticket_id,customer_id,issue_type,ticket_date,resolution_status\n' + 
+                tickets.map(t => `${t.ticket_id},${t.customer_id},${t.issue_type},${t.ticket_date},${t.resolution_status}`).join('\n');
+            document.body.innerHTML = '<pre style="margin:0;font-family:monospace;white-space:pre-wrap;">' + csv + '</pre>';
+            
+        } else {
+            // Documentation page when no API param
+            document.body.innerHTML = `
+                <style>
+                    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+                    .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                    h1 { color: #333; }
+                    .endpoint { background: #f0f0f0; padding: 10px; border-radius: 4px; margin: 10px 0; font-family: monospace; font-size: 14px; word-break: break-all; }
+                    .method { display: inline-block; background: #4CAF50; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; margin-right: 10px; }
+                </style>
+                <div class="card">
+                    <h1>🚀 Support Tickets Mock API</h1>
+                    <p><strong>Base URL:</strong> ${window.location.origin}${window.location.pathname}</p>
+                </div>
+                
+                <div class="card">
+                    <h2>Available Endpoints:</h2>
+                    
+                    <h3><span class="method">GET</span> All Tickets</h3>
+                    <div class="endpoint">${window.location.origin}${window.location.pathname}?api=tickets</div>
+                    
+                    <h3><span class="method">GET</span> Single Ticket</h3>
+                    <div class="endpoint">${window.location.origin}${window.location.pathname}?api=tickets&id=T001</div>
+                    
+                    <h3><span class="method">GET</span> Filter by Status</h3>
+                    <div class="endpoint">${window.location.origin}${window.location.pathname}?api=tickets&status=pending</div>
+                    
+                    <h3><span class="method">GET</span> Statistics</h3>
+                    <div class="endpoint">${window.location.origin}${window.location.pathname}?api=stats</div>
+                    
+                    <h3><span class="method">GET</span> CSV Format</h3>
+                    <div class="endpoint">${window.location.origin}${window.location.pathname}?api=csv</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Query Parameters:</h3>
+                    <ul>
+                        <li><strong>status</strong> - Filter by resolution status (pending, closed, resolved)</li>
+                        <li><strong>issue_type</strong> - Filter by issue type</li>
+                        <li><strong>customer_id</strong> - Filter by customer ID</li>
+                        <li><strong>id</strong> - Get specific ticket by ID</li>
+                    </ul>
+                </div>
+            `;
         }
-
-        function testUrl(urlId, outputId) {
-            const url = document.getElementById(urlId).textContent;
-            fetch(url)
-                .then(r => r.text())
-                .then(data => {
-                    const output = document.getElementById(outputId);
-                    output.style.display = 'block';
-                    output.textContent = data;
-                });
-        }
-
-        handleAPIRequest();
     </script>
 </body>
 </html>
