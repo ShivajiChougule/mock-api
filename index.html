@@ -110,20 +110,28 @@
             margin-bottom: 20px;
         }
         .note strong { color: #1e40af; }
+        .json-output {
+            background: white;
+            color: #1e293b;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            white-space: pre;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🚀 Support Tickets Mock API</h1>
-            <p style="margin: 10px 0;">Ready for Microsoft Fabric Pipeline Integration</p>
+            <p style="margin: 10px 0;">Ready for Microsoft Fabric Pipeline & Postman</p>
             <span class="status">● LIVE</span>
         </div>
         
         <div class="content">
             <div class="note">
                 <strong>📌 Base URL:</strong> <span id="baseUrl"></span><br>
-                <strong>🔗 Use these endpoints in your Fabric pipeline configuration</strong>
+                <strong>✅ Returns pure JSON - works with Postman, Fabric, Python, etc.</strong>
             </div>
 
             <div class="endpoint-card">
@@ -207,6 +215,7 @@
             if (!api) return;
 
             let response;
+            let contentType = 'application/json';
             
             if (api === 'tickets') {
                 const id = params.get('id');
@@ -224,7 +233,6 @@
                     if (customer_id) filtered = filtered.filter(t => t.customer_id === customer_id);
                     response = { count: filtered.length, tickets: filtered };
                 }
-                document.body.innerHTML = `<pre>${JSON.stringify(response, null, 2)}</pre>`;
             } else if (api === 'stats') {
                 const stats = {
                     total: tickets.length,
@@ -237,12 +245,17 @@
                     stats.by_status[status] = (stats.by_status[status] || 0) + 1;
                     stats.by_issue_type[issue] = (stats.by_issue_type[issue] || 0) + 1;
                 });
-                document.body.innerHTML = `<pre>${JSON.stringify(stats, null, 2)}</pre>`;
+                response = stats;
             } else if (api === 'csv') {
-                const csv = 'ticket_id,customer_id,issue_type,ticket_date,resolution_status\n' + 
+                contentType = 'text/csv';
+                response = 'ticket_id,customer_id,issue_type,ticket_date,resolution_status\n' + 
                     tickets.map(t => `${t.ticket_id},${t.customer_id},${t.issue_type},${t.ticket_date},${t.resolution_status}`).join('\n');
-                document.body.innerHTML = `<pre>${csv}</pre>`;
+                document.body.innerHTML = `<div class="json-output">${response}</div>`;
+                return;
             }
+
+            // Return pure JSON
+            document.body.innerHTML = `<div class="json-output">${JSON.stringify(response, null, 2)}</div>`;
         }
 
         function copyUrl(elementId) {
